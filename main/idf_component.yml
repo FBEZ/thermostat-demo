@@ -1,0 +1,14 @@
+version: "0.0.1"
+description: Template for rotary knob display
+
+targets:
+  - esp32s3
+
+dependencies:
+  idf: ">=5.1.0"
+  lvgl/lvgl:
+    version: "^8"
+    public: true
+  button:
+    version: "^3"
+    public: true
