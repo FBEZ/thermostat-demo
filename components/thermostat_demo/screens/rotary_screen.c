@@ -3,7 +3,7 @@
 
 extern lv_group_t * g;
 
-lv_obj_t * rotary_screen(void){
+lv_obj_t * rotary_screen_create(void){
     lv_obj_t * main = lv_obj_create(NULL);
     lv_obj_t * arc = lv_arc_create(main);
     lv_obj_set_size(arc, 150, 150);

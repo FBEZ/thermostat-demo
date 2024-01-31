@@ -9,7 +9,7 @@ void button_1_cb(lv_event_t * e);
 void button_2_cb(lv_event_t * e);
 void button_3_cb(lv_event_t * e);
 
-lv_obj_t * menu_screen(void){
+lv_obj_t * menu_screen_create(void){
 
     //lv_group_set_default(g);
 
@@ -18,7 +18,7 @@ lv_obj_t * menu_screen(void){
     lv_obj_t * central_panel = lv_obj_create(main);
     lv_obj_set_style_bg_color(central_panel, lv_color_hex(0x00CAFE),0);
     lv_obj_set_style_radius(central_panel,LV_RADIUS_CIRCLE,0);
-    lv_obj_set_style_size(central_panel,CENTRAL_PANEL_RADIUS,0);
+    lv_obj_set_style_size(central_panel,CENTRAL_PANEL_RADIUS_PX,0);
     lv_obj_center(central_panel);
 
     lv_obj_t * button_1 = create_simple_button(central_panel,"Button 1");

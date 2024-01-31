@@ -4,8 +4,8 @@
 #include "lvgl.h"
 #include "layout.h"
 
-lv_obj_t * welcome_screen(void);
-lv_obj_t * menu_screen(void);
-lv_obj_t * rotary_screen(void);
+lv_obj_t * welcome_screen_create(void);
+lv_obj_t * menu_screen_create(void);
+lv_obj_t * rotary_screen_create(void);
 
 #endif
