@@ -13,8 +13,10 @@ void button_thermometer_cb(lv_event_t * e);
 void button_air_quality_cb(lv_event_t * e);
 void button_timer_cb(lv_event_t * e);
 
-lv_obj_t * menu_screen_create(void){
+static screens_callbacks_t cbs;
 
+lv_obj_t * menu_screen_create(screens_callbacks_t screens_callback){
+    cbs = screens_callback;
     //lv_group_set_default(g);
 
     lv_obj_t * main = lv_obj_create(NULL);
@@ -48,15 +50,24 @@ void button_thermometer_cb(lv_event_t * e){
     if(e->code==LV_EVENT_FOCUSED){
         lv_img_set_src((lv_obj_t *)e->user_data, &main_menu_thermometer);
     }
+    if(e->code==LV_EVENT_PRESSED){
+        cbs.temperature_screen_cb(NULL);
+    }
 }
 void button_air_quality_cb(lv_event_t * e){
     if(e->code==LV_EVENT_FOCUSED){
         lv_img_set_src((lv_obj_t *)e->user_data, &main_menu_air_quality);
     }
+    if(e->code==LV_EVENT_PRESSED){
+        cbs.air_quality_screen_cb(NULL);
+    }
 }
 void button_timer_cb(lv_event_t * e){
     if(e->code==LV_EVENT_FOCUSED){
         lv_img_set_src((lv_obj_t *)e->user_data, &main_menu_timer);
+    }
+    if(e->code==LV_EVENT_PRESSED){
+        cbs.timer_screen_cb(NULL);
     }
 }
 

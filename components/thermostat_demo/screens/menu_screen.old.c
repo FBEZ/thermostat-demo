@@ -9,7 +9,7 @@ void button_1_cb(lv_event_t * e);
 void button_2_cb(lv_event_t * e);
 void button_3_cb(lv_event_t * e);
 
-lv_obj_t * menu_screen_create(void){
+lv_obj_t * menu_screen_create(screens_callbacks_t screens_callbacks){
 
     //lv_group_set_default(g);
 

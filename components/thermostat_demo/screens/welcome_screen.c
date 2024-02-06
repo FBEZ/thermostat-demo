@@ -8,7 +8,7 @@ LV_FONT_DECLARE(logo_font_40);
 static void anim_opa_cb(void * var, int32_t v);
 
 
-lv_obj_t * welcome_screen_create(lv_anim_ready_cb_t finished_cb){
+lv_obj_t * welcome_screen_create(screens_callbacks_t finished_cb){
     lv_obj_t * main = lv_obj_create(NULL);
     lv_scr_load(main);
     lv_obj_set_scrollbar_mode(main,LV_SCROLLBAR_MODE_OFF);
@@ -78,7 +78,7 @@ lv_obj_t * welcome_screen_create(lv_anim_ready_cb_t finished_cb){
     lv_anim_set_time(&a_logo_text_appear, INITIAL_ANIMATIONS_DURATION_MS); 
     lv_anim_set_exec_cb(&a_logo_text_appear, anim_opa_cb);
     lv_anim_set_path_cb(&a_logo_text_appear, lv_anim_path_linear);
-    lv_anim_set_ready_cb(&a_logo_text_appear,finished_cb );
+    lv_anim_set_ready_cb(&a_logo_text_appear,finished_cb.menu_screen_cb );
     //lv_anim_start(&a_small_logo);
 
 
