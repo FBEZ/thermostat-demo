@@ -399,7 +399,7 @@ void __qmsd_encoder_read(lv_indev_drv_t *drv, lv_indev_data_t *data)
     static int16_t cont_last = 0;
 
     int16_t cont_now = mt8901_get_count();
-    data->enc_diff = cont_now - cont_last;//ECO_STEP(cont_now - cont_last);
+    data->enc_diff = ECO_STEP(cont_now - cont_last);
     cont_last = cont_now;
 	button_event_t event = iot_button_get_event(g_btn);
     if ((event == BUTTON_PRESS_DOWN) || 

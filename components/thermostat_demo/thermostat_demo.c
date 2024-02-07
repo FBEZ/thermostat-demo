@@ -9,6 +9,10 @@
 lv_group_t *  g;
 extern lv_indev_t * knob_indev;
 bool welcome_screen_loaded = false;
+thermostat_settings_t settings = {
+    .set_temperature_deci_celsius = 22,
+    .measured_temperature_deci_celsius = 22
+};
 
 void load_menu_screen_cb(lv_anim_t * a);
 void load_temperature_screen_cb(lv_anim_t * a);
@@ -25,6 +29,7 @@ static screens_callbacks_t cbs = {
 
 void thermostat_demo(void)
 {
+
     g= lv_group_create();
     lv_indev_set_group(knob_indev, g);
     lv_obj_t * welcome_scr = welcome_screen_create(cbs);
@@ -33,9 +38,9 @@ void thermostat_demo(void)
 
 
 void load_menu_screen_cb(lv_anim_t * a) {
-        printf("called\n");
+        printf("called menu screen\n");
         lv_obj_t * menu_scr = menu_screen_create(cbs);
-        lv_scr_load_anim(menu_scr,LV_SCR_LOAD_ANIM_FADE_ON,1000,0,true);
+        lv_scr_load_anim(menu_scr,LV_SCR_LOAD_ANIM_NONE,0,0,true);
 }
 
 void load_temperature_screen_cb(lv_anim_t * a){
