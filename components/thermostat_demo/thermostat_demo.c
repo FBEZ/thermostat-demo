@@ -10,8 +10,8 @@ lv_group_t *  g;
 extern lv_indev_t * knob_indev;
 bool welcome_screen_loaded = false;
 thermostat_settings_t settings = {
-    .set_temperature_deci_celsius = 22,
-    .measured_temperature_deci_celsius = 22
+    .set_temperature_celsius = 22,
+    .measured_temperature_celsius = 22
 };
 
 void load_menu_screen_cb(lv_anim_t * a);
@@ -55,5 +55,8 @@ void load_air_quality_screen_cb(lv_anim_t * a){
 }
 
 void load_timer_screen_cb(lv_anim_t * a){
-
+    lv_obj_t * timer_scr = timer_screen_create(cbs);
+    printf("Timer created\n");
+    lv_scr_load_anim(timer_scr, LV_SCR_LOAD_ANIM_NONE, 0,0,true);
+    printf("Loaded\n");
 }

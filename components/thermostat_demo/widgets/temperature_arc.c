@@ -1,5 +1,5 @@
 #include "widgets.h"
-
+#include <stdio.h>
 extern thermostat_settings_t settings;
 LV_FONT_DECLARE(roboto_regular_100);
 LV_FONT_DECLARE(roboto_regular_50);
@@ -7,6 +7,8 @@ LV_FONT_DECLARE(roboto_regular_50);
 static lv_style_t style_arc;
 
 static void set_temperature_value_changed_cb(lv_event_t * e);
+static int16_t percentage_from_temperature(int16_t);
+static int16_t temperature_from_percentage(int16_t);
 
 lv_obj_t * create_temperature_arc(lv_obj_t * parent){
     
@@ -15,14 +17,9 @@ lv_obj_t * create_temperature_arc(lv_obj_t * parent){
     lv_arc_set_rotation(arc, 135);
     lv_arc_set_bg_angles(arc, 0, 270);
     //lv_arc_set_range(arc,TEMPERATURE_ARC_MIN_DECI_CELSIUS,TEMPERATURE_ARC_MAX_DECI_CELSIUS);
-    lv_arc_set_value(arc, (settings.set_temperature_deci_celsius-MINIMUM_TEMPERATURE)/(MAXIMUM_TEMPERATURE-MINIMUM_TEMPERATURE)*100);
+    lv_arc_set_value(arc, percentage_from_temperature(settings.set_temperature_celsius));
+    printf("First temperature set: %d\n", percentage_from_temperature(settings.set_temperature_celsius));
     lv_obj_center(arc);
-
-
-    //lv_style_init(&style_arc);
-    //lv_style_set_arc_color(&style_arc, lv_color_hex(COLOR_PALETTE_ONE));
-    //lv_style_set_bg_color(&style_arc, lv_color_hex(COLOR_PALETTE_THREE));
-    //lv_obj_add_style(arc,&style_arc,LV_PART_MAIN); 
   
     lv_obj_set_style_arc_color(arc,lv_color_hex(COLOR_PALETTE_ONE),LV_PART_INDICATOR);
     lv_obj_set_style_bg_color(arc,lv_color_hex(COLOR_PALETTE_THREE),LV_PART_KNOB);
@@ -45,10 +42,12 @@ lv_obj_t * create_temperature_arc(lv_obj_t * parent){
     return arc;
 }
 
-int16_t temperature_from_percentage(int16_t percentage){
+static int16_t temperature_from_percentage(int16_t percentage){
     return (MINIMUM_TEMPERATURE + percentage*(MAXIMUM_TEMPERATURE-MINIMUM_TEMPERATURE)/100);
 }
-
+static int16_t percentage_from_temperature(int16_t temperature){
+    return (temperature-MINIMUM_TEMPERATURE)*100/(MAXIMUM_TEMPERATURE-MINIMUM_TEMPERATURE);
+}
 
 
 static void set_temperature_value_changed_cb(lv_event_t * e){
@@ -62,8 +61,9 @@ static void set_temperature_value_changed_cb(lv_event_t * e){
   
 
     lv_label_set_text_fmt(label, "%d", temperature_from_percentage(scale_factor));
-    settings.set_temperature_deci_celsius = temperature_from_percentage;
+    settings.set_temperature_celsius = temperature_from_percentage(scale_factor);
+    printf("Scale factor: %d\tSet temp: %d\n", scale_factor, settings.set_temperature_celsius);
+
     lv_obj_set_style_text_color(label, point_color,0);
-    lv_obj_set_style_arc_color(arc,point_color,LV_PART_INDICATOR);
-    lv_obj_set_style_bg_color(arc,point_color,LV_PART_KNOB);
+    lv_obj_set_style_bg_color(arc,point_color,LV_PART_INDICATOR);
 }

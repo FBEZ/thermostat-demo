@@ -9,5 +9,6 @@ lv_obj_t * welcome_screen_create(screens_callbacks_t);
 lv_obj_t * menu_screen_create(screens_callbacks_t);
 lv_obj_t * rotary_screen_create(screens_callbacks_t);
 lv_obj_t * pie_menu_create(screens_callbacks_t);
+lv_obj_t * timer_screen_create(screens_callbacks_t);
 
 #endif

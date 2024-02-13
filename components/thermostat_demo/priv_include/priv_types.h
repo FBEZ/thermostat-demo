@@ -10,8 +10,8 @@ typedef struct _welcome_screen_callbacks{
 
 
 typedef struct _settings{
-    int16_t set_temperature_deci_celsius;
-    int16_t measured_temperature_deci_celsius;
+    int16_t set_temperature_celsius;
+    int16_t measured_temperature_celsius;
 }thermostat_settings_t;
 
 #endif
